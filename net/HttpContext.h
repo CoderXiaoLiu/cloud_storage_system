@@ -16,10 +16,10 @@ class HttpContext : public mymuduo::copyable
  public:
   enum HttpRequestParseState
   {
-    kExpectRequestLine, //0
-    kExpectHeaders,     //1
-    kExpectBody,        //2
-    kGotAll,           //3
+    kExpectRequestLine, // 解析请求行
+    kExpectHeaders,     // 解析请求头 
+    kExpectBody,        // 解析请求体
+    kGotAll,           // 解析完成
   };
 
   enum ParseResult

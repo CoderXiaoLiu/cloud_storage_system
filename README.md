@@ -150,7 +150,6 @@ CREATE TABLE IF NOT EXISTS file_shares (
 
 ## 3.2 编译和运行
 ```
-cd lesson29_file_manager
 mkdir build
 cd build
 cmake ..

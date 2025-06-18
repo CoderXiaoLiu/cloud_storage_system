@@ -78,11 +78,11 @@ public:
     }
 
 private:
-    std::map<std::string, std::string> headers_;
-    HttpStatusCode statusCode_;
+    std::map<std::string, std::string> headers_; // 头部
+    HttpStatusCode statusCode_; // 状态码
     std::string statusMessage_;
     bool closeConnection_;
-    std::string body_;
+    std::string body_; // 主体内容
     bool async_;                    // 是否为异步响应
     ResponseCallback responseCallback_;  // 响应回调函数
 }; // class HttpResponse

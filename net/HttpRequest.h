@@ -239,15 +239,15 @@ class HttpRequest : public mymuduo::copyable
   }
 
  private:
-  Method method_;
-  Version version_;
-  string path_;
-  string query_;
-  string body_;
-  Timestamp receiveTime_;
-  std::map<string, string> headers_;
+  Method method_; // 请求方法
+  Version version_; // http版本
+  string path_; // 请求路径
+  string query_; // 查询参数
+  string body_; // 请求体
+  Timestamp receiveTime_; // 接收时间
+  std::map<string, string> headers_; // 请求头
   // 添加路径参数存储
-  std::unordered_map<std::string, std::string> pathParams_;
+  std::unordered_map<std::string, std::string> pathParams_; //路径参数
 };
 
 

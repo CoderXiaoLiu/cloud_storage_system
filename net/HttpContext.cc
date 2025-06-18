@@ -7,6 +7,7 @@ using namespace mymuduo;
 using namespace mymuduo::net;
 bool HttpContext::processRequestLine(const char* begin, const char* end)
 {
+  // 解析请求行
   bool succeed = false;
   const char* start = begin;
   const char* space = std::find(start, end, ' ');
