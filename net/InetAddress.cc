@@ -56,8 +56,8 @@ InetAddress::InetAddress(uint16_t port, bool loopbackOnly)
     ::bzero(&addr_, sizeof addr_);
     addr_.sin_family = AF_INET;
     in_addr_t ip = loopbackOnly ? kInaddrLoopback : kInaddrAny;
-    addr_.sin_addr.s_addr = sockets::hostToNetwork32(ip);
-    addr_.sin_port = sockets::hostToNetwork16(port);
+    addr_.sin_addr.s_addr = mymuduo::sockets::hostToNetwork32(ip);
+    addr_.sin_port = mymuduo::sockets::hostToNetwork16(port);
 }
 
 InetAddress::InetAddress(StringArg ip, uint16_t port)
@@ -66,7 +66,7 @@ InetAddress::InetAddress(StringArg ip, uint16_t port)
     {
         ::bzero(&addr6_, sizeof addr6_);
         addr6_.sin6_family = AF_INET6;
-        addr6_.sin6_port = sockets::hostToNetwork16(port);
+        addr6_.sin6_port = mymuduo::sockets::hostToNetwork16(port);
         if (::inet_pton(AF_INET6, ip.c_str(), &addr6_.sin6_addr) <= 0)
         {
             LOG_ERROR << "InetAddress::InetAddress invalid IPv6 addr";
@@ -76,7 +76,7 @@ InetAddress::InetAddress(StringArg ip, uint16_t port)
     {
         ::bzero(&addr_, sizeof addr_);
         addr_.sin_family = AF_INET;
-        addr_.sin_port = sockets::hostToNetwork16(port);
+        addr_.sin_port = mymuduo::sockets::hostToNetwork16(port);
         if (::inet_pton(AF_INET, ip.c_str(), &addr_.sin_addr) <= 0)
         {
             LOG_ERROR << "InetAddress::InetAddress invalid IPv4 addr";
@@ -90,7 +90,7 @@ InetAddress::InetAddress(StringArg ip, uint16_t port, bool ipv6)
     {
         ::bzero(&addr6_, sizeof addr6_);
         addr6_.sin6_family = AF_INET6;
-        addr6_.sin6_port = sockets::hostToNetwork16(port);
+        addr6_.sin6_port = mymuduo::sockets::hostToNetwork16(port);
         if (::inet_pton(AF_INET6, ip.c_str(), &addr6_.sin6_addr) <= 0)
         {
             LOG_ERROR << "InetAddress::InetAddress invalid IPv6 addr";
@@ -100,7 +100,7 @@ InetAddress::InetAddress(StringArg ip, uint16_t port, bool ipv6)
     {
         ::bzero(&addr_, sizeof addr_);
         addr_.sin_family = AF_INET;
-        addr_.sin_port = sockets::hostToNetwork16(port);
+        addr_.sin_port = mymuduo::sockets::hostToNetwork16(port);
         if (::inet_pton(AF_INET, ip.c_str(), &addr_.sin_addr) <= 0)
         {
             LOG_ERROR << "InetAddress::InetAddress invalid IPv4 addr";
@@ -129,7 +129,7 @@ std::string InetAddress::toIpPort() const
     {
         ::inet_ntop(AF_INET, &addr_.sin_addr, buf, sizeof buf);
         size_t end = ::strlen(buf);
-        uint16_t port = sockets::networkToHost16(addr_.sin_port);
+        uint16_t port = mymuduo::sockets::networkToHost16(addr_.sin_port);
         snprintf(buf + end, sizeof buf - end, ":%u", port);
     }
     else if (family() == AF_INET6)
@@ -137,7 +137,7 @@ std::string InetAddress::toIpPort() const
         buf[0] = '[';
         ::inet_ntop(AF_INET6, &addr6_.sin6_addr, buf + 1, sizeof buf - 1);
         size_t end = ::strlen(buf);
-        uint16_t port = sockets::networkToHost16(addr6_.sin6_port);
+        uint16_t port = mymuduo::sockets::networkToHost16(addr6_.sin6_port);
         snprintf(buf + end, sizeof buf - end, "]:%u", port);
     }
     return buf;
@@ -145,7 +145,7 @@ std::string InetAddress::toIpPort() const
 
 uint16_t InetAddress::port() const
 {
-    return sockets::networkToHost16(portNetEndian());
+    return mymuduo::sockets::networkToHost16(portNetEndian());
 }
 
 uint32_t InetAddress::ipv4NetEndian() const

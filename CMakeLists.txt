@@ -13,9 +13,15 @@ if(NOT CMAKE_BUILD_TYPE)
 
 endif()
 
-# 查找Boost库
+# 查找头文件
 find_package(Boost REQUIRED)
-include_directories(${Boost_INCLUDE_DIRS})
+include_directories(
+    ${Boost_INCLUDE_DIRS}
+    ${PROJECT_SOURCE_DIR}/include
+    ${PROJECT_SOURCE_DIR}/include/base
+    ${PROJECT_SOURCE_DIR}/include/net
+    ${PROJECT_SOURCE_DIR}/include/net/poller
+)
 
 # Debug模式下的编译选项
 set(CMAKE_CXX_FLAGS_DEBUG "-O0 -g -Wall -Wextra -Werror -Wconversion -Wno-reorder -Wno-unused-parameter -Wno-shadow")
